@@ -1,7 +1,42 @@
+
+
+
+
 .App {
-  text-align: center;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns:  15% auto 15%;
+  grid-template-rows: 15% auto 15%;
+  grid-template-areas: 
+  'logo title button'
+  'sidebar1 content1 sidebar2'
+  'sidebar1 content2 sidebar2'
+  'sidebar1 content3 sidebar2'
+  'bottom1 bottom1 bottom1';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  border-style: dashed;
 }
 
+.grid-item {
+  border-style: dotted;
+
+}
+
+#logo {  grid-area: logo;  }
+#title {  grid-area: title;  }
+#button { grid-area: button;  }
+#content1 {  grid-area: content1;  }
+#content2 {  grid-area: content2;  }
+#content3 {  grid-area: content3;  }
+#sidebar1 {  grid-area: sidebar1;  }
+#sidebar2 {  grid-area: sidebar2;  }
+#bottom {  grid-area: bottom1;  }
+
+
+/*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -30,3 +65,4 @@
     transform: rotate(360deg);
   }
 }
+*/

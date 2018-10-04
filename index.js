@@ -37,7 +37,7 @@ var makeTransaction = (token, accountNumber) => {return {
     },
     body: JSON.stringify({
         "fromAccountNumber": accountNumber,
-        "toAccountNumber": "18000168013",
+        "toAccountNumber": "18000120932",
         "amount": "100.00",
         "message": "This should be optional",
         "dueDate": "2018-10-04"
@@ -97,7 +97,7 @@ app.post('/make', function(req, res) {
 })
 
 app.post('/confirm', function(req, res) {
-    console.log(JSON.parse(req.body))
+    console.log((req.body))
     request.post(confirmTransaction(req.body.token, req.body.signingreference), (err, response, body) => {
         console.log(JSON.parse(body))
         res.send(JSON.parse(body));

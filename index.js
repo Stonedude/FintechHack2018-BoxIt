@@ -89,13 +89,17 @@ app.post('/accounts', function(req, res) {
 
 app.post('/make', function(req, res) {
     // accounts[0].accountNumber.value
+    console.log(JSON.parse(req.body))
     request.post(makeTransaction(req.body.token, req.body.accountnumber), (err, response, body) => {
+        console.log(JSON.parse(body))
         res.send(JSON.parse(body));
     })
 })
 
 app.post('/confirm', function(req, res) {
+    console.log(JSON.parse(req.body))
     request.post(confirmTransaction(req.body.token, req.body.signingreference), (err, response, body) => {
+        console.log(JSON.parse(body))
         res.send(JSON.parse(body));
     })
 })

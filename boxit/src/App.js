@@ -58,7 +58,7 @@ class App extends Component {
         {this.state.page == 0 &&
           <div className="App">
             <div className="grid-item" id="logo"> </div>
-            <div className="grid-item" id="title"><h1>JustCrowdThings</h1><p>Powered by BoXIt</p></div>
+          <div className="grid-item" id="title"><div className="box"><h1>JustCrowdThings</h1><p>Powered by BoXIt</p></div></div>
             <button className="grid-item" id="button" onClick={() => this.setPage(1)}>Pay monies</button>
 
             <div className="grid-item" id="content1">
@@ -72,8 +72,14 @@ class App extends Component {
               
             </article>            
             </div>
-            <div className="grid-item" id="content3">Turtles here</div>
-            <div className="grid-item" id="sidebar1">Shoppo stuff</div>
+            <div className="grid-item" id="sidebar1">
+              <div className="box"></div>
+              <div className="box"></div>
+              <div className="box"></div>
+              <div className="box"></div>
+            
+            
+            </div>
             <div className="grid-item" id="sidebar2">More things here</div>
 
             <div className="grid-item" id="bottom">This is the end</div>

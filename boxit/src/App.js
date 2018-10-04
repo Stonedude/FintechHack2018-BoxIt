@@ -56,23 +56,15 @@ class App extends Component {
         <div className="grid-item" id="content3">Turtles here</div>
         <div className="grid-item" id="sidebar1">Shoppo stuff</div>
         <div className="grid-item" id="sidebar2">More things here</div>
-        
-        <div className="grid-item" id="bottom">This is the end</div>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <a onClick={this.getAccounts}>Login to sparebanken</a>
-          <a onClick={this.makeTransaction}>Make transaction</a>
-          <a onClick={this.confirmTransaction}>Confirm</a>
-          {this.state.token && <p>{this.state.token}</p>}
-          {this.state.accounts.length > 0 && <p>{this.state.accounts[0].accountNumber.value}</p>}
-          {this.state.transaction && <div><p>Amount: {this.state.transaction.amount}</p><p>Status: {this.state.transaction.signingStatus}</p></div>}
 
+        <div className="grid-item" id="bottom">This is the end</div>
+
+        <a onClick={this.getAccounts}>Login to sparebanken</a>
+        <a onClick={this.makeTransaction}>Make transaction</a>
+        <a onClick={this.confirmTransaction}>Confirm</a>
+        {this.state.token && <p>{this.state.token}</p>}
+        {this.state.accounts.length > 0 && <p>{this.state.accounts[0].accountNumber.value}</p>}
+        {this.state.transaction && <div><p>Amount: {this.state.transaction.amount}</p><p>Status: {this.state.transaction.signingStatus}</p></div>}
       </div>
     );
   }

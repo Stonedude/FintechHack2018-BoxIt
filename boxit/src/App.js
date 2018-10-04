@@ -95,6 +95,7 @@ class App extends Component {
           <div className= "App">
           <div className="grid-item" id="logo"> <h1>>BoxIt</h1> </div>
           <div className="grid-item" id="title"> <h2>Velg en bank du vil betale fra</h2><ul>
+            
             <li onClick={() => { this.setPage(2); this.login(); }}>Sparebank 1</li>
             <li>SBanken</li>
             <li>DNB</li>
@@ -112,18 +113,15 @@ class App extends Component {
             </div>
           <div className="grid-item" id="box">
             <h2>Hvilken bankkonto vil du betale fra?</h2>
-            <table>
-              <tbody>
-                {this.state.accounts.length === 0 && <tr>Loading...</tr>}
-                {this.state.accounts.map(elem => 
-                  <tr key={elem.accountNumber.value} onClick={() => {this.makeTransaction(elem.accountNumber.value);this.setPage(3)}}>
-                    <td>Navn: {elem.name}</td>
-                    <td>Beskrivelse: {elem.description}</td>
-                    <td>Saldo: {elem.availableBalance.amount}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+
+              {this.state.accounts.length === 0 && <p>Loading...</p>}
+              {this.state.accounts.map(elem => 
+                <div className="giveMeBorder" key={elem.accountNumber.value} onClick={() => {this.makeTransaction(elem.accountNumber.value);this.setPage(3)}}>
+                  <p>Navn: {elem.name}</p>
+                  <p>Beskrivelse: {elem.description}</p>
+                  <p>Saldo: {elem.availableBalance.amount}</p>
+                </div>
+              )}
             </div>
 
           </div>

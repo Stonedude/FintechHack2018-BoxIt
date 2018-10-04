@@ -82,6 +82,13 @@ h1 > #logo {
 #sidebar2 {  grid-area: sidebar2; display: grid; grid-auto-columns: auto; grid-gap: 10px; }
 
 
+
+.giveMeBorder {
+  border-radius: 15px;
+  border: 1px solid black;
+  margin-top: 3%;
+}
+
 /*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

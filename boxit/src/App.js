@@ -92,24 +92,25 @@ class App extends Component {
 
         {this.state.page === 1 &&
           <div className= "App">
-            <div className="grid-item" id="logo"> BoxIt</div>
-            <div className="grid-item" id="title">BOxibot</div>
+          <div className="grid-item" id="logo"> <h1>BoxIt</h1> </div>
+          <div className="grid-item" id="title"> <h2>Velg en bank du vil betale fra</h2><ul>
+            <li onClick={() => { this.setPage(2); this.login(); }}>Sparebank 1</li>
+            <li>SBanken</li>
+            <li>DNB</li>
+          </ul></div>
 
-            <h2>Velg en bank du vil betale fra</h2>
-            <ul>
-              <li onClick={() => {this.setPage(2);this.login();}}>Sparebank 1</li>
-              <li>SBanken</li>
-              <li>DNB</li>
-            </ul>
+           
+           
 
           </div>
         }
         {this.state.page === 2 &&
-          <div>
-            <div className="grid-item" id="logo"> BoxIt</div>
-            <div className="grid-item" id="title">BOxibot</div>
-
-            <h2>Hvilken konto vil du betale fra?</h2>
+          <div className="App">
+            <div className="grid-item" id="logo">
+            <h1>>BoxIt</h1>
+            </div>
+            <div className="grid-item" id="title">
+            <h2>Hvilken bankkonto vil du betale fra?</h2>
             <table>
               <tbody>
                 {this.state.accounts.length === 0 && <tr>Loading...</tr>}
@@ -119,15 +120,17 @@ class App extends Component {
                     <td>Beskrivelse: {elem.description}</td>
                     <td>Saldo: {elem.availableBalance.amount}</td>
                   </tr>
-                  )}
+                )}
               </tbody>
             </table>
+            </div>
+
           </div>
         }
         {(this.state.page === 3 && !this.state.transaction) && <div>Loading....</div>}
 
         {(this.state.page === 3 && this.state.transaction) &&
-          <div>
+          <div className="App">
           <div className="grid-item" id="logo"> BoxIt</div>
           <div className="grid-item" id="title">BOxibot</div>
 
@@ -144,7 +147,7 @@ class App extends Component {
       {(this.state.page === 4 && this.state.transaction && this.state.transaction.errors && this.state.transaction.errors.length > 0) && <div> Loading.... Error retrying.... {this.confirmTransaction()}</div>}
 
       {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus === 'COMPLETE') &&
-        <div>
+        <div className="App">
           <div className="grid-item" id="logo"> Logoting</div>
           <div className="grid-item" id="title">Thank you for your investment</div>
           <button className="grid-item" id="button" onClick={() => this.setPage(1)}>Pay monies</button>

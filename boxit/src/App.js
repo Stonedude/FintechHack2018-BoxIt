@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.page == 0 &&
+        {this.state.page === 0 &&
           <div className="App">
             <div className="grid-item" id="logo"> Logoting</div>
             <div className="grid-item" id="title">Titletuff</div>
@@ -68,17 +68,10 @@ class App extends Component {
             <div className="grid-item" id="sidebar2">More things here</div>
 
             <div className="grid-item" id="bottom">This is the end</div>
-
-            <a onClick={this.getAccounts}>Login to sparebanken</a>
-            <a onClick={this.makeTransaction}>Make transaction</a>
-            <a onClick={this.confirmTransaction}>Confirm</a>
-            {this.state.token && <p>{this.state.token}</p>}
-            {this.state.accounts.length > 0 && <p>{this.state.accounts[0].accountNumber.value}</p>}
-            {this.state.transaction && <div><p>Amount: {this.state.transaction.amount}</p><p>Status: {this.state.transaction.signingStatus}</p></div>}
           </div>
         }
 
-        {this.state.page == 1 &&
+        {this.state.page === 1 &&
           <div>
             <div className="grid-item" id="logo"> BoxIt</div>
             <div className="grid-item" id="title">BOxibot</div>
@@ -92,7 +85,7 @@ class App extends Component {
 
           </div>
         }
-        {this.state.page == 2 &&
+        {this.state.page === 2 &&
           <div>
             <div className="grid-item" id="logo"> BoxIt</div>
             <div className="grid-item" id="title">BOxibot</div>
@@ -100,6 +93,7 @@ class App extends Component {
             <h2>Hvilken konto vil du betale fra?</h2>
             <table>
               <tbody>
+                {this.state.accounts.length === 0 && <tr>Loading...</tr>}
                 {this.state.accounts.map(elem => 
                   <tr key={elem.accountNumber.value} onClick={() => {this.makeTransaction(elem.accountNumber.value);this.setPage(3)}}>
                     <td>{elem.name}</td>
@@ -111,19 +105,25 @@ class App extends Component {
             </table>
           </div>
         }
-        {(this.state.page == 3 && this.state.transaction) &&
+        {(this.state.page === 3 && !this.state.transaction) && <div>Loading....</div>}
+
+        {(this.state.page === 3 && this.state.transaction) &&
           <div>
           <div className="grid-item" id="logo"> BoxIt</div>
           <div className="grid-item" id="title">BOxibot</div>
 
           <h2>Er dette riktig?</h2>
           <p>Support: Superbil</p>
-          <p>Amount: {this.state.transaction.amount}</p>
+          <p>From account: {this.state.transaction.fromAccountNumber}</p>
+          <p>Amount: {this.state.transaction.amount}{this.state.currencyCode}</p>
           <p>Status: {this.state.transaction.signingStatus}</p>
           <button onClick={() => {this.confirmTransaction(); this.setPage(4)}}>Confirm</button>
         </div>
       }
-      {(this.state.page == 4 && this.state.transaction && this.state.transaction.signingStatus === 'COMPLETE') &&
+
+      {(this.state.page === 4 && !this.state.transaction && this.state.transaction.signingStatus !== 'COMPLETE') && <div>Loading....</div>}
+
+      {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus === 'COMPLETE') &&
         <div>
           <div className="grid-item" id="logo"> Logoting</div>
           <div className="grid-item" id="title">Thank you for your support</div>
@@ -137,12 +137,6 @@ class App extends Component {
 
           <div className="grid-item" id="bottom">This is the end</div>
 
-          <a onClick={this.getAccounts}>Login to sparebanken</a>
-          <a onClick={this.makeTransaction}>Make transaction</a>
-          <a onClick={this.confirmTransaction}>Confirm</a>
-          {this.state.token && <p>{this.state.token}</p>}
-          {this.state.accounts.length > 0 && <p>{this.state.accounts[0].accountNumber.value}</p>}
-          {this.state.transaction && <div><p>Amount: {this.state.transaction.amount}</p><p>Status: {this.state.transaction.signingStatus}</p></div>}
         </div>
       }
       

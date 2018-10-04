@@ -45,6 +45,13 @@ button {
   padding: 5px;
 }
 
+#box{
+  background-color: #457b9d;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+
 /* colors
 #e63946 - Red
 #f1faee - White

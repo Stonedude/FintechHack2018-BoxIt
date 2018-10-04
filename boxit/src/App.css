@@ -14,7 +14,7 @@
   'sidebar1 content3 sidebar2'
   'bottom1 bottom1 bottom1';
   grid-gap: 10px;
-  background-color: #2196F3;
+  background-color: #1d3557;
   padding: 10px;
   border-style: dashed;
 }
@@ -22,13 +22,22 @@
 .grid-item {
   border-style: dotted;
   text-align: center;
-  align-content: center;
+  color: #a8dadc;
+  justify-content: center;
 
 }
 
-#logo {  grid-area: logo;  }
+/* colors
+#e63946 - Red
+#f1faee - White
+#a8dadc - Light Blue
+#457b9d - Medium Blue
+#1d3557 - Deep Blue
+*/
+
+#logo {  grid-area: logo; align-items: center;  }
 #title {  grid-area: title;  }
-#button { grid-area: button;  }
+#button { grid-area: button; color:#e63946; }
 #content1 {  grid-area: content1;  }
 #content2 {  grid-area: content2;  }
 #content3 {  grid-area: content3;  }

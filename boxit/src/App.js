@@ -7,7 +7,7 @@ class App extends Component {
 
   constructor() {
     super();
-      this.state = {token: ''}
+      this.state = {token: '', accounts: []}
   }
 
   login = () => {
@@ -16,13 +16,40 @@ class App extends Component {
     });
   }
 
+  getOptionsForPostRequest = (url, obj) => {
+    return {
+      url: `http://localhost:8080/${url}`,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify(obj)
+    }
+  }
+
+  getAccounts = () => {
+    request.post(this.getOptionsForPostRequest('accounts', this.state), (err, req, body) => {
+      this.setState({accounts: JSON.parse(body)})
+    })
+  }
+
+  makeTransaction = () => {
+    request.post(this.getOptionsForPostRequest('make', {token: this.state.token, accountnumber: this.state.accounts[0].accountNumber.value}), (err, req, body) => {
+      this.setState({transaction: JSON.parse(body)})
+    })
+  }
+  confirmTransaction = () => {
+    request.post(this.getOptionsForPostRequest('confirm', {token: this.state.token, signingreference: this.state.transaction.signingReference}), (err, req, body) => {
+      this.setState({transaction: JSON.parse(body)})
+  })
+}
+  
   render() {
     return (
       <div className="App">
 
         <div className="grid-item" id="logo"> Logoting</div>
         <div className="grid-item" id="title">Titletuff</div>
-        <button className="grid-item" id="button">Buttonhere</button>
+        <button className="grid-item" id="button" onClick={this.login}>Pay monies</button>
 
         <div className="grid-item" id="content1">Dis a car</div>
         <div className="grid-item" id="content2">Dis a snake</div>
@@ -39,8 +66,13 @@ class App extends Component {
           >
             Learn React
           </a>
-          <a onClick={this.login}>Pay monies</a>
-          <p>{this.state.token}</p>
+          <a onClick={this.getAccounts}>Login to sparebanken</a>
+          <a onClick={this.makeTransaction}>Make transaction</a>
+          <a onClick={this.confirmTransaction}>Confirm</a>
+          {this.state.token && <p>{this.state.token}</p>}
+          {this.state.accounts.length > 0 && <p>{this.state.accounts[0].accountNumber.value}</p>}
+          {this.state.transaction && <div><p>Amount: {this.state.transaction.amount}</p><p>Status: {this.state.transaction.signingStatus}</p></div>}
+
       </div>
     );
   }

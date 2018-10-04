@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+var request = require('request');
 
 class App extends Component {
+
+  constructor() {
+    super();
+      this.state = {token: ''}
+  }
+
+  login = () => {
+    request.get('http://localhost:8080/bearer', (err, req, body) => {
+      this.setState({token: body})
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -26,6 +39,8 @@ class App extends Component {
           >
             Learn React
           </a>
+          <a onClick={this.login}>Pay monies</a>
+          <p>{this.state.token}</p>
       </div>
     );
   }

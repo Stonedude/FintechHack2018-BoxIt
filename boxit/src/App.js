@@ -16,16 +16,8 @@ class App extends Component {
         <div className="grid-item" id="content3">Turtles here</div>
         <div className="grid-item" id="sidebar1">Shoppo stuff</div>
         <div className="grid-item" id="sidebar2">More things here</div>
-        
+
         <div className="grid-item" id="bottom">This is the end</div>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
       </div>
     );
   }

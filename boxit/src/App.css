@@ -21,6 +21,8 @@
 
 .grid-item {
   border-style: dotted;
+  text-align: center;
+  align-content: center;
 
 }
 

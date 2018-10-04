@@ -19,11 +19,18 @@
   border-style: dashed;
 }
 
+img {
+  height: 100%;
+  width: 1fr;
+  border-radius: 15px;
+}
+
+
+
 .grid-item {
   border-style: dotted;
   text-align: center;
   color: #a8dadc;
-  justify-content: center;
 
 }
 

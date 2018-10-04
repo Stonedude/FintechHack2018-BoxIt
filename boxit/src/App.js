@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   getOptionsForPostRequest = (url, obj) => {
+    console.log(JSON.stringify(obj));
     return {
       url: `http://localhost:8080/${url}`,
       headers: {
@@ -43,6 +44,7 @@ class App extends Component {
 
   makeTransaction = (accountnumber) => {
     request.post(this.getOptionsForPostRequest('make', {token: this.state.token, accountnumber}), (err, req, body) => {
+      console.log(JSON.parse(body))
       this.setState({transaction: JSON.parse(body)})
     })
   }
@@ -129,19 +131,19 @@ class App extends Component {
 
           <h2>Er dette riktig?</h2>
           <p>Support: Superbil</p>
-          <p>From account: {this.state.transaction.fromAccountNumber}</p>
+          <p>From account: {this.state.transaction.fromAccountNumber.value}</p>
           <p>Amount: {this.state.transaction.amount}{this.state.currencyCode}</p>
           <p>Status: {this.state.transaction.signingStatus}</p>
           <button onClick={() => {this.confirmTransaction(); this.setPage(4)}}>Confirm</button>
         </div>
       }
 
-      {(this.state.page === 4 && !this.state.transaction && this.state.transaction.signingStatus !== 'COMPLETE') && <div>Loading....</div>}
+      {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus !== 'COMPLETE') && <div>Loading....</div>}
 
       {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus === 'COMPLETE') &&
         <div>
           <div className="grid-item" id="logo"> Logoting</div>
-          <div className="grid-item" id="title">Thank you for your support</div>
+          <div className="grid-item" id="title">Thank you for your investment</div>
           <button className="grid-item" id="button" onClick={() => this.setPage(1)}>Pay monies</button>
 
           <div className="grid-item" id="content1">Dis a car</div>

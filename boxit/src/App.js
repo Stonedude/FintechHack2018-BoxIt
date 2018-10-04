@@ -54,9 +54,9 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
+      <div>
         {this.state.page == 0 &&
-          <div>
+          <div className="App">
             <div className="grid-item" id="logo"> Logoting</div>
             <div className="grid-item" id="title">Titletuff</div>
             <button className="grid-item" id="button" onClick={() => this.setPage(1)}>Pay monies</button>

@@ -59,8 +59,8 @@ class App extends Component {
       <div>
         {this.state.page === 0 &&
           <div className="App">
-            <div className="grid-item" id="logo"> </div>
-          <div className="grid-item" id="title"><div className="box"><h1>JustCrowdThings</h1><p>Powered by BoXIt</p></div></div>
+            <div className="grid-item" id="logo"> <h1>Meny</h1></div>
+          <div className="grid-item" id="title"><div className="box"><h1>JustCrowdThings</h1><p>Powered by >BoxIt</p></div></div>
             <button className="grid-item" id="button" onClick={() => this.setPage(1)}>Pay monies</button>
 
             <div className="grid-item" id="content1">
@@ -82,15 +82,16 @@ class App extends Component {
             
             
             </div>
-            <div className="grid-item" id="sidebar2">More things here</div>
-
-            <div className="grid-item" id="bottom">This is the end</div>
+            <div className="grid-item" id="sidebar2">
+            <div className="box"></div>
+            <div className="box"></div>
+            </div>
           </div>
         }
 
         {this.state.page === 1 &&
           <div className= "App">
-          <div className="grid-item" id="logo"> <h1>BoxIt</h1> </div>
+          <div className="grid-item" id="logo"> <h1>>BoxIt</h1> </div>
           <div className="grid-item" id="title"> <h2>Velg en bank du vil betale fra</h2><ul>
             <li onClick={() => { this.setPage(2); this.login(); }}>Sparebank 1</li>
             <li>SBanken</li>
@@ -105,9 +106,9 @@ class App extends Component {
         {this.state.page === 2 &&
           <div className="App">
             <div className="grid-item" id="logo">
-            <h1>>BoxIt</h1>
+            <h1 className="page3" id="box">>BoxIt</h1>
             </div>
-            <div className="grid-item" id="title">
+          <div className="grid-item" id="box">
             <h2>Hvilken bankkonto vil du betale fra?</h2>
             <table>
               <tbody>
@@ -128,16 +129,19 @@ class App extends Component {
         {(this.state.page === 3 && !this.state.transaction) && <div>Loading....</div>}
 
         {(this.state.page === 3 && this.state.transaction) &&
-          <div className="App">
-          <div className="grid-item" id="logo"> BoxIt</div>
-          <div className="grid-item" id="title">BOxibot</div>
-
-          <h2>Er dette riktig?</h2>
-          <p>Support: Superbil</p>
-          <p>From account: {this.state.transaction.fromAccountNumber.value}</p>
-          <p>Amount: {this.state.transaction.amount}{this.state.currencyCode}</p>
-          <p>Status: {this.state.transaction.signingStatus}</p>
-          <button onClick={() => {this.confirmTransaction(); this.setPage(4)}}>Confirm</button>
+          <div className="App" id="page3">
+          <div className="grid-item" id="logo"> <h1>>BoxIt</h1></div>
+          <div className="grid-item" id="title" id="page3">
+            <h2>Er dette riktig?</h2>
+            <p>Support: Superbil</p>
+            <p>From account: {this.state.transaction.fromAccountNumber.value}</p>
+            <p>Amount: {this.state.transaction.amount}{this.state.currencyCode}</p>
+          </div>
+          <div className="grid-item" id="button">
+            <p>Status:</p>
+           <p>{this.state.transaction.signingStatus}</p>
+           <button onClick={() => {this.confirmTransaction(); this.setPage(4)}}>Confirm</button>
+          </div >
         </div>
       }
 

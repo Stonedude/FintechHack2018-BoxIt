@@ -11,8 +11,7 @@
   'logo title button'
   'sidebar1 content1 sidebar2'
   'sidebar1 content2 sidebar2'
-  'sidebar1 content3 sidebar2'
-  'bottom1 bottom1 bottom1';
+  'sidebar1 content2 sidebar2';
   grid-gap: 10px;
   background-color: #1d3557;
   padding: 10px;
@@ -32,7 +31,6 @@ button {
 }
 
 .grid-item {
-  border-style: dotted;
   text-align: center;
   color: #a8dadc;
 
@@ -51,7 +49,22 @@ button {
   padding: 5px;
 }
 
+#box1{
+  background-color:#1d3557;
+  border-radius: 15px;
+  padding: 5px;
+}
 
+
+#page3 {
+  justify-content: center;
+  align-content: center;
+}
+
+h1 > #logo {
+  background-color: #457b9d;
+  border-radius: 15px;
+}
 /* colors
 #e63946 - Red
 #f1faee - White
@@ -66,8 +79,7 @@ button {
 #content1 {  grid-area: content1;  }
 #content2 {  grid-area: content2;  background-color: #457b9d; border-radius: 15px;}
 #sidebar1 {  grid-area: sidebar1; display: grid; grid-auto-columns: auto; grid-gap: 10px;  }
-#sidebar2 {  grid-area: sidebar2;  }
-#bottom {  grid-area: bottom1;  }
+#sidebar2 {  grid-area: sidebar2; display: grid; grid-auto-columns: auto; grid-gap: 10px; }
 
 
 /*

@@ -1,7 +1,10 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var request = require('request');
- 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 var getBearer = {
     url: 'https://developer-api.sparebank1.no/oauth/token',
     headers: {
@@ -61,23 +64,33 @@ http.listen(8080, function(){
   console.log('listening on *:8080');
 });
 
+app.get('/bearer', function(req, res) {
+    request.post(getBearer, (err, response, body) => {
+        var info = JSON.parse(body);
+        console.log(body)
+        let access_token = info.access_token;
+        res.send(access_token);
+    });
+});
 
-new Promise(res => 
-request.post(getBearer, (err, response, body) => {
-    var info = JSON.parse(body);
-    console.log(body)
-    let access_token = info.access_token;
-    res(access_token);
-})).then(token => new Promise(res => 
-request.get(getAccounts(token), (err, response, body) => {
-    let info = JSON.parse(body)
-    console.log(body);
-    res({token, accounts: info.accounts})
-}))).then(({token, accounts}) => new Promise(res => 
-request.post(makeTransaction(token, accounts[0].accountNumber.value), (err, response, body) => {
-    console.log(body);
-    res({token, data: JSON.parse(body)});
-}))).then(({token, data}) => new Promise(res => 
-request.post(confirmTransaction(token, data.signingReference), (err, response, body) => {
-    console.log(body);
-})))
+app.post('/accounts', function(req, res) {
+    console.log(req.body)
+    request.get(getAccounts(req.body.token), (err, response, body) => {
+        let info = JSON.parse(body)
+        console.log(body);
+        res.send(info.accounts)
+    })
+});
+
+app.post('/make', function(req, res) {
+    // accounts[0].accountNumber.value
+    request.post(makeTransaction(req.body.token, req.body.accountnumber), (err, response, body) => {
+        res.send(JSON.parse(body));
+    })
+})
+
+app.post('/confirm', function(req, res) {
+    request.post(confirmTransaction(req.body.token, req.body.signingreference), (err, response, body) => {
+        res.send(JSON.parse(body));
+    })
+})

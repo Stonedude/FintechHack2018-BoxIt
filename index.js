@@ -98,8 +98,12 @@ app.post('/make', function(req, res) {
 
 app.post('/confirm', function(req, res) {
     console.log((req.body))
-    request.post(confirmTransaction(req.body.token, req.body.signingreference), (err, response, body) => {
-        console.log(JSON.parse(body))
-        res.send(JSON.parse(body));
-    })
+    try{
+        request.post(confirmTransaction(req.body.token, req.body.signingreference), (err, response, body) => {
+            console.log(JSON.parse(body))
+            res.send(JSON.parse(body));
+        })
+    }catch(e) {
+        res.send('{}')
+    }
 })

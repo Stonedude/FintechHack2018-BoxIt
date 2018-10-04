@@ -11,6 +11,7 @@ class App extends Component {
         token: '',
         accounts: [],
         page: 0,
+        signingreference: ''
       }
   }
 
@@ -45,11 +46,12 @@ class App extends Component {
   makeTransaction = (accountnumber) => {
     request.post(this.getOptionsForPostRequest('make', {token: this.state.token, accountnumber}), (err, req, body) => {
       console.log(JSON.parse(body))
+      this.setState({signingreference: JSON.parse(body).signingReference})
       this.setState({transaction: JSON.parse(body)})
     })
   }
   confirmTransaction = () => {
-    request.post(this.getOptionsForPostRequest('confirm', {token: this.state.token, signingreference: this.state.transaction.signingReference}), (err, req, body) => {
+    request.post(this.getOptionsForPostRequest('confirm', {token: this.state.token, signingreference: this.state.signingreference}), (err, req, body) => {
       this.setState({transaction: JSON.parse(body)})
   })
 }
@@ -113,11 +115,11 @@ class App extends Component {
             <table>
               <tbody>
                 {this.state.accounts.length === 0 && <tr>Loading...</tr>}
-                {this.state.accounts.map(elem =>
-                  <tr key={elem.accountNumber.value} onClick={() => { this.makeTransaction(elem.accountNumber.value); this.setPage(3) }}>
-                    <td>{elem.name}</td>
-                    <td>{elem.description}</td>
-                    <td>{elem.availableBalance.amount}</td>
+                {this.state.accounts.map(elem => 
+                  <tr key={elem.accountNumber.value} onClick={() => {this.makeTransaction(elem.accountNumber.value);this.setPage(3)}}>
+                    <td>Navn: {elem.name}</td>
+                    <td>Beskrivelse: {elem.description}</td>
+                    <td>Saldo: {elem.availableBalance.amount}</td>
                   </tr>
                 )}
               </tbody>
@@ -146,6 +148,7 @@ class App extends Component {
       }
 
       {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus !== 'COMPLETE') && <div>Loading....</div>}
+      {(this.state.page === 4 && this.state.transaction && this.state.transaction.errors && this.state.transaction.errors.length > 0) && <div> Loading.... Error retrying.... {this.confirmTransaction()}</div>}
 
       {(this.state.page === 4 && this.state.transaction && this.state.transaction.signingStatus === 'COMPLETE') &&
         <div className="App">
@@ -164,7 +167,6 @@ class App extends Component {
         </div>
       }
       
-        
       </div>
     );
   }
